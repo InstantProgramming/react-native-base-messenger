@@ -1,6 +1,7 @@
 import React, {View, Text, StyleSheet, TouchableHighlight, Image} from 'react-native';
 import Bubble from './Bubble';
 import ErrorButton from './ErrorButton';
+import ParsedText from 'react-native-parsed-text';
 
 var styles = StyleSheet.create({
   rowContainer: {
