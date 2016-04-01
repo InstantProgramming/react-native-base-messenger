@@ -1,4 +1,5 @@
 import React, {Text, View, Animated, Image, StyleSheet} from 'react-native';
+import ParsedText from 'react-native-parsed-text';
 
 let styles = StyleSheet.create({
   bubble: {
@@ -29,7 +30,9 @@ let styles = StyleSheet.create({
   bubbleError: {
     backgroundColor: '#e01717'
   },
-
+  highlight: {
+    color: blue,
+  },
 });
 
 export default class Bubble extends React.Component {
@@ -48,9 +51,16 @@ export default class Bubble extends React.Component {
       return this.props.renderCustomText(this.props);
     }
     return (
-      <Text style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}>
+      <ParsedText 
+        style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}
+        parse={[
+          {type: 'url',   style: styles.highlight,   onPress: this.handleUrlPress},
+          {type: 'phone', style: styles.highlight, onPress: this.handlePhonePress},
+          {type: 'email', style: styles.highlight, onPress: this.handleEmailPress},
+        }]
+        >
         {text}
-      </Text>
+      </ParsedText>
     );
   }
 
