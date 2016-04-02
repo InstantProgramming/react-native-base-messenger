@@ -1,7 +1,6 @@
-import React, {View, Text, StyleSheet, TouchableHighlight, Image} from 'react-native';
-import Bubble from './Bubble';
-import ErrorButton from './ErrorButton';
-import ParsedText from 'react-native-parsed-text';
+import React, {View, Text, StyleSheet, TouchableHighlight, Image} from 'react-native'
+import Bubble from './Bubble'
+import ErrorButton from './ErrorButton'
 
 var styles = StyleSheet.create({
   rowContainer: {
@@ -44,16 +43,16 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: -5,
   },
-});
+})
 
 export default class Message extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   componentWillMount() {
-    Object.assign(styles, this.props.styles);
+    Object.assign(styles, this.props.styles)
   }
 
   renderName(name, displayNames, diffMessage){
@@ -65,16 +64,16 @@ export default class Message extends React.Component {
             ]}>
             {name}
           </Text>
-        );
+        )
       }
     }
-    return null;
+    return null
   }
 
   renderImage(rowData, rowID, diffMessage, forceRenderImage, onImagePress){
     if (rowData.image !== undefined && rowData.image !== null) {
       if (forceRenderImage === true) {
-        diffMessage = null; // force rendering
+        diffMessage = null // force rendering
       }
 
       if (diffMessage === null || (diffMessage != null && (rowData.name !== diffMessage.name || rowData.id !== diffMessage.id))) {
@@ -86,21 +85,21 @@ export default class Message extends React.Component {
             >
               <Image source={rowData.image} style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}/>
             </TouchableHighlight>
-          );
+          )
         } else {
           return (
             <Image source={rowData.image} style={[styles.imagePosition, styles.image, (rowData.position === 'left' ? styles.imageLeft : styles.imageRight)]}/>
-          );
+          )
         }
       } else {
         return (
           <View style={styles.imagePosition}/>
-        );
+        )
       }
     }
     return (
       <View style={styles.spacer}/>
-    );
+    )
   }
 
   renderErrorButton(rowData, rowID, onErrorButtonPress){
@@ -114,7 +113,7 @@ export default class Message extends React.Component {
         />
       )
     }
-    return null;
+    return null
   }
 
   renderStatus(status){
@@ -124,10 +123,10 @@ export default class Message extends React.Component {
           <View>
             <Text style={styles.status}>{status}</Text>
           </View>
-        );
+        )
       }
     }
-    return null;
+    return null
   }
 
   render(){
@@ -142,16 +141,16 @@ export default class Message extends React.Component {
       forceRenderImage,
       onImagePress,
       onMessageLongPress,
-    } = this.props;
+    } = this.props
 
-    var flexStyle = {};
-    var RowView = Bubble;
+    var flexStyle = {}
+    var RowView = Bubble
     if ( rowData.text.length > 40 ) {
-      flexStyle.flex = 1;
+      flexStyle.flex = 1
     }
 
     if ( rowData.view ) {
-      RowView = rowData.view;
+      RowView = rowData.view
     }
 
     var messageView = (
@@ -164,6 +163,9 @@ export default class Message extends React.Component {
           {position === 'right' ? this.renderErrorButton(rowData, rowID, onErrorButtonPress) : null}
           <RowView
             {...rowData}
+            handleUrlPress={this.props.handleUrlPress}
+            handlePhonePress={this.props.handlePhonePress}
+            handleEmailPress={this.props.handleEmailPress}
             renderCustomText={this.props.renderCustomText}
             styles={styles}
             name={position === 'left' && this.props.displayNamesInsideBubble ? this.renderName(rowData.name, displayNames, diffMessage) : null}
@@ -172,7 +174,7 @@ export default class Message extends React.Component {
         </View>
         {rowData.position === 'right' ? this.renderStatus(rowData.status) : null}
       </View>
-    );
+    )
 
     if (typeof onMessageLongPress === 'function') {
       return (
@@ -181,9 +183,9 @@ export default class Message extends React.Component {
           onLongPress={() => onMessageLongPress(rowData, rowID)}>
           {messageView}
         </TouchableHighlight>
-      );
+      )
     } else {
-      return messageView;
+      return messageView
     }
   }
 }

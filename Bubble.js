@@ -31,7 +31,7 @@ let styles = StyleSheet.create({
     backgroundColor: '#e01717'
   },
   highlight: {
-    color: blue,
+    color: 'blue',
   },
 });
 
@@ -51,13 +51,13 @@ export default class Bubble extends React.Component {
       return this.props.renderCustomText(this.props);
     }
     return (
-      <ParsedText 
+      <ParsedText
         style={[styles.text, (position === 'left' ? styles.textLeft : styles.textRight)]}
         parse={[
-          {type: 'url',   style: styles.highlight,   onPress: this.handleUrlPress},
-          {type: 'phone', style: styles.highlight, onPress: this.handlePhonePress},
-          {type: 'email', style: styles.highlight, onPress: this.handleEmailPress},
-        }]
+          {type: 'url',   style: styles.highlight,   onPress: this.props.handleUrlPress},
+          {type: 'phone', style: styles.highlight, onPress: this.props.handlePhonePress},
+          {type: 'email', style: styles.highlight, onPress: this.props.handleEmailPress},
+        ]}
         >
         {text}
       </ParsedText>

@@ -203,7 +203,9 @@ var GiftedMessenger = React.createClass({
           onImagePress={this.props.onImagePress}
           onMessageLongPress={this.props.onMessageLongPress}
           renderCustomText={this.props.renderCustomText}
-
+          handleUrlPress={this.props.handleUrlPress}
+          handleEmailPress={this.props.handleEmailPress}
+          handlePhonePress={this.props.handlePhonePress}
           styles={this.styles}
         />
       </View>
